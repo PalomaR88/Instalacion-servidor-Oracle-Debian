@@ -1,5 +1,5 @@
 # Instalación de un servidor Oracle 12c
-En este punto se explica la instalación de Oracle Database 12c Release 2 (12.2.0.1.0) - Enterprise Edition en Debian Jessie (8.11.0).
+En este punto se explica la instalación de **Oracle Database 12c Release 2 (12.2.0.1.0) - Enterprise Edition en Debian Jessie (8.11.0)**.
 
 ### Configuración de la máquina servidor
 Para la máquina servidor se utiliza el sistema operativo Debian Jessie (8.11.0) con 30 GB de disco duro y 2 GB de memoria RAM. 
@@ -58,7 +58,7 @@ $ sudo ln -s /usr/lib/x86_64-linux-gnu /usr/lib64
 ~~~
 
 ### Configuración en el fichero /etc/sysctl.d/local-oracle.conf
-Para realizar la configuración del fichero /etc/sysctl.d/local-oracle.conf en primer lugar hay que saber los valores del sistema que se deben introducir. Para fs.file-max, fs.aio-max-nr, kernel.sem y kernel.shmmni se usan los siguientes comandos:
+Para realizar la configuración del fichero /etc/sysctl.d/local-oracle.conf en primer lugar hay que saber los valores del sistema que se deben introducir. Para **fs.file-max**, **fs.aio-max-nr**, **kernel.sem** y **kernel.shmmni** se usan los siguientes comandos:
 ~~~
 $ sudo sysctl -a | grep '^fs.file-max'
 fs.file-max = 204094
@@ -71,15 +71,15 @@ $ sudo sysctl -a | grep '^kernel.shmmni'
 kernel.shmmni = 4096
 ~~~
 
-El valor de kernel.shmmax se consigue con:
+El valor de **kernel.shmmax** se consigue con:
 ~~~
 $ sudo free -b | grep -Ei 'mem:' | awk '{print $2}'
 2107785216
 ~~~
 
-Para calcular el kernel.shmall se aplica la fórmula: (kernel.shmmax -1) / kernel.shmmni, que en nuestro caso da 514595.
+Para calcular el **kernel.shmall** se aplica la fórmula: (kernel.shmmax -1) / kernel.shmmni, que en nuestro caso da 514595.
 
-Para ver el valor vm.hugetlb_shm_group (GID del grupo, dba) se utiliza:
+Para ver el valor **vm.hugetlb_shm_group** (GID del grupo, dba) se utiliza:
 ~~~
 $ cat /etc/group | grep dba
 dba:x:127:oracle
@@ -210,24 +210,24 @@ Generation complete.
 
 ### Instalación de paquetes
 En primer lugar, hay que instalar los siguientes paquetes:
-    • Build-essential: para crear paquetes debian.
-    • Binutils: proporciona las herramientas de desarrollo necesarias para desempaquetar.
-    • Libcap-dev: implementa las interfaces del usuario para POSIX 1003.1 e disponibles en el kernel Linux.
-    • Gcc: compilador de GNU C.
-    • G++: compilador G++.
-    • Libc6-dev: biblioteca de C de GNU.
-    • Ksh: para automatizar en sistemas basados en Unix.
-    • Libaio-dev: biblioteca que permite usar el sistema de llamadas de entrada y salida asíncronas del kernel.
-    • Make: utilidad de la línea de comandos que permite descargar la última versión de otras herramientas del sistema. 
-    • Libxi-dev: biblioteca de extensión para X11.
-    • Libxau-dev: biblioteca de autorización de X11.
-    • Libxtst-dev: biblioteca de extensión de grabación X11.
-    • Libxcb1-dev: biblioteca que proporciona una interfaz para el protocolo del sistema de ventanas X. 
-    • Sysstat: herramienta de rendimiento del sistema para Linux.
-    • Rpm: para gestionar paquetes .rpm.
-    • Xauth: es una herramienta para leer y manipular los archivos Xauthority.
-    • Xorg: implementación de código abierto del sistema de ventanas X.
-    • Unzip: desarchivador de archivos .zip. 
+- **Build-essential**: para crear paquetes debian.
+- **Binutils**: proporciona las herramientas de desarrollo necesarias para desempaquetar.
+- **Libcap-dev**: implementa las interfaces del usuario para POSIX 1003.1 e disponibles en el kernel Linux.
+- **Gcc**: compilador de GNU C.
+- **G++**: compilador G++.
+- **Libc6-dev**: biblioteca de C de GNU.
+- **Ksh**: para automatizar en sistemas basados en Unix.
+- **Libaio-dev**: biblioteca que permite usar el sistema de llamadas de entrada y salida asíncronas del kernel.
+- **Make**: utilidad de la línea de comandos que permite descargar la última versión de otras herramientas del sistema. 
+- **Libxi-dev**: biblioteca de extensión para X11.
+- **Libxau-dev**: biblioteca de autorización de X11.
+- **Libxtst-dev**: biblioteca de extensión de grabación X11.
+- **Libxcb1-dev**: biblioteca que proporciona una interfaz para el protocolo del sistema de ventanas X. 
+- **Sysstat**: herramienta de rendimiento del sistema para Linux.
+- **Rpm**: para gestionar paquetes .rpm.
+- **Xauth**: es una herramienta para leer y manipular los archivos Xauthority.
+- **Xorg**: implementación de código abierto del sistema de ventanas X.
+- **Unzip**: desarchivador de archivos .zip. 
 ~~~
 $ sudo apt-get -y install build-essential binutils libcap-dev gcc g++ libc6-dev ksh libaio-dev make libxi-dev libxtst-dev libxau-dev libxcb1-dev sysstat rpm xauth xorg unzip
 ~~~
@@ -249,17 +249,198 @@ $ database/runInstaller -IgnoreSysPreReqs -ignorePrereq
 
 ### Consola de instalación
 La consola de instalación de Oracle es una herramienta sencilla, pero es muy importante que todos los pasos se realicen correctamente. En la primera pantalla hay que introducir un correo electrónico para recibir información sobre los problemas de seguridad de Oracle, es opcional. 
+![imagen1](images/aimg.png)
 
+Se selecciona la opción de instalación Crear y configurar Base de Datos:
+![imagen2](images/bimg.png)
 
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*********** Voy por la foto que hay detras de este renglon:
+Se elige una clase para el sistema entre Escritorio y Servidor, el último en nuestro caso ya que se quiere crear un servidor Oracle con opciones avanzadas.
+![imagen3](images/cimg.png)
+
+El tipo de instalación puede ser Real Application Cluster que es de uso compartido con dos o más nodos. La base de Datos RAC One Node que, aunque puede constar de más de una máquina física, una misma instancia solo puede ejecutarse en 1 nodo al mismo tiempo. Y por último, la opción de instancia única:
+![imagen4](images/dimg.png)
+
+Hay dos tipos de instalación: la típica, más básica en cuanto a configuración aunque con una instalación muy completa, y la instalación avanzada que permite configurar aspectos de la instalación como las contraseñas de las cuentas por defecto, copias de seguridad, etc. En nuestro caso elegiremos la opción avanzada.
+![imagen5](images/eimg.png)
+
 En cuanto a la edición que se instalará, existen de nuevo dos opciones, Entrerprise que es más exigente, es la que elegiremos, y Standard con necesidades más básicas. 
+![imagen6](images/fimg.png)
+
+La siguiente ventana es para especificar las rutas de la base de Oracle, y la configuración del software, y la ubicación del software propiamente dicho, que a su vez será el directorio raíz de Oracle. Estas opciones aparecen completas por defecto por pantalla, aunque pueden ser modificados. 
+![imagen7](images/gimg.png)
+
+También se indica la ruta del directorio de inventario y el nombre del grupo del sistema cuyos usuarios tendrán permisos sobre el inventario. 
+![imagen8](images/himg.png)
+
+En cuanto a el tipo de base de datos que se desea crear, se puede elegir entre una de Uso General o Almacenes de Datos, más optimizada. 
+![imagen9](images/iimg.png)
+
+A continuación, se elige el nombre de la base de Datos Global, el identificador del Sistema Oracle (SID) y el nombre de Datos de Conexión.
+![imagen10](images/jimg.png)
+
+En la ventana de opciones de configuración aparecen 3 pestañas, son importantes dos de ellas. La de juegos de caracteres donde se selecciona Usar Unicode y el esquema de ejemplo, donde se selecciona la opción para instalar esquema de ejemplo en la base de datos. 
+![imagen11](images/kimg.png)
+
+
+![imagen12](images/limg.png)
+
+Las opciones de almacenamiento pueden ser Sistema de archivo donde hay que especificar una ruta, se recomienda que sea distinta a la del software. U Oracle Automatic Storage Management  que es una gestión simplificada y automática. 
+![imagen13](images/mimg.png)
+
+Se puede registrar en Enterprise Manager Cloud Control para que gestione de manera centralizada cada base de datos. En nuestro caso no marcamos esta opción.
+![imagen14](images/nimg.png)
+
+Tampoco marcamos la opción de recuperación. 
+![imagen15](images/oimg.png)
+
+La ventana de contraseñas, donde se puede elegir diferentes contraseñas para los diferentes usuarios de administración por defecto, o usar la misma para todos. Puede salir un warning si la contraseña no está muy elaborada:
+![imagen16](images/pimg.png)
+
+Tras confirmar las contraseñas se habilitan los privilegios a los grupos:
+![imagen17](images/qimg.png)
+
+En este punto, la configuración está completada y la siguiente pantalla es un resumen con todas las opciones que se han elegido. 
+![imagen18](images/rimg.png)
+
+Lo siguiente es comenzar la instalación, pulsando el botón instalar. No hay que hacer nada más hasta que aparezca la siguiente ventana. 
+![imagen19](images/simg.png)
+
+Entonces hay que seguir los pasos que se indican en la misma:
+~~~
+oracle@oracleServer:~$ sudo /opt/oraInventory/orainstRoot.sh
+[sudo] password for oracle:
+Sorry, try again.
+[sudo] password for oracle:
+Cambiando permisos de /opt/oraInventory.
+Agregando permisos de lectura y escritura para el grupo.
+Eliminando permisos de lectura, escritura y ejecución para el público.
+
+Cambiando el nombre de grupo de /opt/oraInventory a oinstall.
+La ejecución del archivo de comandos ha terminado
+
+$ sudo /opt/oracle/product/12.2.0.1/dbhome_1/root.sh
+Performing root user operation.
+~~~
+Cuando la instalación llegue al 100% es importante que todos los pasos de esta tengan un tick verde. Entonces la instalación se habrá realizado correctamente. 
+![imagen20](images/timg.png)
+
+### Configuración de usuarios
+Una vez instalado correctamente Oracle se inicia sesión con el usuario system, pero antes hay que configurar los usuarios con los siguientes comandos:
+~~~
+$ alter session set "_ORACLE_SCRIPT"=true;
+$ echo 'alter session set "_ORACLE_SCRIPT"=true;' >> $ORACLE_HOME/sqlplus/admin/glogin.sql      
+~~~
+
+
+### Configuración del acceso remoto:
+Para ello hay que configurar el fichero **$ORACLE_HOME/network/admin/listener.ora** de la siguiente manera:
+~~~
+SID_LIST_LISTENER =
+ (SID_LIST =
+  (SID_DESC =
+   (GLOBAL_DBNAME = orcl)
+   (ORACLE_HOME = /opt/oracle/product/12.2.0.1/dbhome_1)
+   (SID_NAME = orasid)
+  )
+ )
+LISTENER=
+ (DESCRIPTION_LIST =
+  (DESCRIPTION =
+   (ADDRESS_LIST =
+	(ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521))
+   )
+   (ADDRESS_LIST =
+	(ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = 1521))
+   )
+  )
+ )
+~~~
+
+Para iniciar la escucha se usa el comando **lsnrctl**:
+~~~
+lsnrctl stop
+lsnrctl start
+~~~
+
+
+### Creación de usuarios
+En primer lugar, hay que iniciar sesión con el usuario sysdba para levantar el gestor de bases de datos.
+~~~
+oracle@oracleServer:~$ sqlplus / as sysdba
+SQL*Plus: Release 12.2.0.1.0 Production on Mar Oct 8 13:00:21 2019
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+Conectado a una instancia inactiva.
+
+SQL> startup
+Instancia ORACLE iniciada.
+
+Total System Global Area  843055104 bytes
+Fixed Size   		    8798360 bytes
+Variable Size      	  612372328 bytes
+Database Buffers          218103808 bytes
+Redo Buffers       	    3780608 bytes
+Base de datos montada.
+Base de datos abierta.
+~~~
+
+Una vez levantada, se iniciar sesión con el usuario system, que permite crear usuarios.
+~~~
+SQL> connect system
+Introduzca la contraseña:
+Conectado.
+~~~
+
+Se crean los usuarios que se quieran crear y se les añaden los permisos. 
+~~~
+SQL> create user c##josemari identified by josemari;
+Usuario creado.
+SQL> GRANT CONNECT TO c##josemari;
+Concesión terminada correctamente.
+
+SQL> GRANT RESOURCE TO c##josemari;
+Concesión terminada correctamente.
+SQL> GRANT UNLIMITED TABLESPACE TO c##josemari;
+Concesión terminada correctamente.
+~~~
+
+### Introducción de datos
+Primero, se inicia sesión con un usuario que no sea administrador. En nuestro caso el usuario es c##josemari.
+~~~
+SQL> connect c##josemari
+Introduzca la contraseña:
+Conectado. 
+~~~
+
+Y se prueba si se pueden insertar tablas y datos:
+~~~
+SQL> create table INGREDIENTES
+(
+    CODIGO varchar2(3),
+    NOMBRE varchar2(40),
+    TIPO varchar2(20),
+    constraint PRI_INGREDIENTES primary key (CODIGO),
+	constraint NULO_NOMBRE_ING check (NOMBRE is not null),
+	constraint UNICO_NOMBRE_ING unique (NOMBRE)
+);
+  2	3	4	5	6	7	8	9  
+Tabla creada.
+
+SQL> insert into INGREDIENTES values ('F','nata','lacteo');
+insert into INGREDIENTES values ('A','agua','otro');
+
+insert into INGREDIENTES values ('B','pimiento verde','fruta');
+SQL> 
+1 fila creada.
+
+SQL>
+1 fila creada.
+
+SQL>
+1 fila creada.
+~~~
+
+![imagen1](images/aimg.png)
+![imagen1](images/aimg.png)
+![imagen1](images/aimg.png)
+![imagen1](images/aimg.png)
 
