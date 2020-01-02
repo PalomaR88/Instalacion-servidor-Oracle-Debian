@@ -438,9 +438,3 @@ SQL>
 SQL>
 1 fila creada.
 ~~~
-
-![imagen1](images/aimg.png)
-![imagen1](images/aimg.png)
-![imagen1](images/aimg.png)
-![imagen1](images/aimg.png)
-
