@@ -1,2 +1,12 @@
-# Instalacion-servidor-Oracle-Debian
+# [Instalacion servidor Oracle Debian](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#instalaci%C3%B3n-de-un-servidor-oracle-12c)
 En este punto se explica la instalación de Oracle Database 12c Release 2 (12.2.0.1.0) - Enterprise Edition en Debian Jessie (8.11.0).
+## [1. Configuración de la máquina servidor](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#configuraci%C3%B3n-de-la-m%C3%A1quina-servidor)
+## [2. Creación de grupos, usuarios, directorios y enlaces](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#creaci%C3%B3n-de-grupos-usuarios-directorios-y-enlaces)
+## [3. Configuración en el fichero /etc/sysctl.d/local-oracle.conf](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#configuraci%C3%B3n-en-el-fichero-etcsysctldlocal-oracleconf)
+## [4. Configuración de otros ficheros](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#configuraci%C3%B3n-de-otros-ficheros)
+## [5. Instalación de paquetes](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#instalaci%C3%B3n-de-paquetes)
+## [6. Consola de instalación](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#consola-de-instalaci%C3%B3n)
+## [7. Configuración de usuarios](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#configuraci%C3%B3n-de-usuarios)
+## [8. Configuración del acceso remoto](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#configuraci%C3%B3n-del-acceso-remoto)
+## [9. Creación de usuarios](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#creaci%C3%B3n-de-usuarios)
+## [10. Introducción de datos](https://github.com/PalomaR88/Instalacion-servidor-Oracle-Debian/blob/master/Manual.md#introducci%C3%B3n-de-datos)
